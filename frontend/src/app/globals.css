@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 8, 47, 73;
+  --background-start-rgb: 240, 249, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: white;
+  min-height: 100vh;
+  font-family: var(--font-outfit), sans-serif;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate(30px, -50px) rotate(10deg);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) rotate(-5deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-xl shadow-sahib-500/5;
+  }
+
+  .glass-card {
+    @apply bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-md border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-sahib-950 text-white px-6 py-4 rounded-2xl font-bold shadow-lg shadow-sahib-900/20 hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 text-sm tracking-wide;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-sahib-900 border border-sahib-100 px-6 py-4 rounded-2xl font-bold shadow-sm hover:bg-sahib-50 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 text-sm;
+  }
+
+  .card {
+    @apply glass p-6 rounded-[2rem] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 relative overflow-hidden;
+  }
+}
+
+/* Custom Utilities */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-sahib-600 to-sahib-900;
+}

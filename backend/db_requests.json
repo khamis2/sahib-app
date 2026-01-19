@@ -1,0 +1,72 @@
+[
+  {
+    "id": "2a59c288-49de-41a3-9d1c-b66958f45ec8",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "price": 45249,
+    "priority": "NORMAL",
+    "location": {
+      "lat": 0,
+      "lng": 0,
+      "address": "Kano"
+    },
+    "status": "PENDING",
+    "createdAt": "2026-01-19T12:44:04.892Z",
+    "updatedAt": "2026-01-19T12:44:04.892Z"
+  },
+  {
+    "id": "7df96962-64a7-4d0e-9f86-b89e7de23a3d",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "price": 6998,
+    "priority": "NORMAL",
+    "location": {
+      "lat": 0,
+      "lng": 0,
+      "address": "Mariri"
+    },
+    "status": "PENDING",
+    "createdAt": "2026-01-19T12:37:06.157Z",
+    "updatedAt": "2026-01-19T12:37:06.157Z"
+  },
+  {
+    "id": "9cf1bf35-5171-4859-a25d-59d5a730958a",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "price": 5000,
+    "priority": "URGENT",
+    "location": {
+      "lat": 0,
+      "lng": 0,
+      "address": "Ungogo"
+    },
+    "status": "CANCELLED",
+    "createdAt": "2026-01-19T10:59:10.650Z",
+    "updatedAt": "2026-01-19T10:59:10.650Z"
+  },
+  {
+    "id": "0627b686-4632-40a7-bbce-e5efb591f8e1",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "price": 2000,
+    "priority": "EXPRESS",
+    "location": {
+      "lat": 0,
+      "lng": 0,
+      "address": "R/zaki"
+    },
+    "status": "PENDING",
+    "createdAt": "2026-01-19T10:56:19.754Z",
+    "updatedAt": "2026-01-19T10:56:19.754Z"
+  },
+  {
+    "id": "7aac83ce-af7a-4e48-8e4d-caa6b05f498b",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "price": 9000,
+    "priority": "NORMAL",
+    "location": {
+      "lat": 0,
+      "lng": 0,
+      "address": "danladi nasidi"
+    },
+    "status": "PENDING",
+    "createdAt": "2026-01-19T10:44:03.157Z",
+    "updatedAt": "2026-01-19T10:44:03.157Z"
+  }
+]

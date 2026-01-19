@@ -1,0 +1,42 @@
+[
+  {
+    "id": "59c20293-da9e-4b65-bed9-d98b92daaa3c",
+    "requestId": "7aac83ce-af7a-4e48-8e4d-caa6b05f498b",
+    "amount": 9000,
+    "status": "HELD_IN_ESCROW",
+    "createdAt": "2026-01-19T10:44:03.161Z",
+    "updatedAt": "2026-01-19T10:44:03.161Z"
+  },
+  {
+    "id": "a44efb76-91bf-4daa-95e0-854279f7b6e9",
+    "requestId": "0627b686-4632-40a7-bbce-e5efb591f8e1",
+    "amount": 2000,
+    "status": "HELD_IN_ESCROW",
+    "createdAt": "2026-01-19T10:56:19.755Z",
+    "updatedAt": "2026-01-19T10:56:19.755Z"
+  },
+  {
+    "id": "d8655354-abf1-40b9-ae0a-e5b1bf277b1c",
+    "requestId": "9cf1bf35-5171-4859-a25d-59d5a730958a",
+    "amount": 5000,
+    "status": "REFUNDED",
+    "createdAt": "2026-01-19T10:59:10.650Z",
+    "updatedAt": "2026-01-19T10:59:10.650Z"
+  },
+  {
+    "id": "a9f3f189-0167-4d07-8317-1bf69e463add",
+    "requestId": "7df96962-64a7-4d0e-9f86-b89e7de23a3d",
+    "amount": 6998,
+    "status": "HELD_IN_ESCROW",
+    "createdAt": "2026-01-19T12:37:06.160Z",
+    "updatedAt": "2026-01-19T12:37:06.160Z"
+  },
+  {
+    "id": "698225d4-a1b3-4f58-b319-3b5426ae8e91",
+    "requestId": "2a59c288-49de-41a3-9d1c-b66958f45ec8",
+    "amount": 45249,
+    "status": "HELD_IN_ESCROW",
+    "createdAt": "2026-01-19T12:44:04.893Z",
+    "updatedAt": "2026-01-19T12:44:04.893Z"
+  }
+]
