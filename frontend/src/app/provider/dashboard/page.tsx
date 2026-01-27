@@ -8,37 +8,65 @@ import { api } from "@/lib/api";
 
 export default function ProviderDashboardPage() {
     const [requests, setRequests] = useState<any[]>([]);
+    const [provider, setProvider] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [processingId, setProcessingId] = useState<string | null>(null);
+    const [isUpdatingAvailability, setIsUpdatingAvailability] = useState(false);
 
-    const fetchRequests = async () => {
+    const fetchDashboardData = async () => {
+        const userData = localStorage.getItem('user');
+        if (!userData) return;
+        const user = JSON.parse(userData);
+
         try {
-            const data = await api.get('/requests/available');
-            if (data.error) {
-                setError(data.error);
+            // Fetch provider data for this user
+            const providerData = await api.get(`/providers/user/${user.id}`);
+            if (providerData && !providerData.error) {
+                setProvider(providerData);
+            }
+
+            // Fetch available requests
+            const reqData = await api.get('/requests/available');
+            if (reqData.error) {
+                setError(reqData.error);
             } else {
-                setRequests(data);
+                setRequests(reqData);
             }
         } catch (err: any) {
-            setError(err.message || "Failed to load requests");
+            setError(err.message || "Failed to load dashboard data");
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchRequests();
+        fetchDashboardData();
     }, []);
+
+    const toggleAvailability = async () => {
+        if (!provider || isUpdatingAvailability) return;
+        setIsUpdatingAvailability(true);
+        try {
+            const result = await api.patch(`/providers/${provider.id}/availability`, {
+                isAvailable: !provider.isAvailable
+            });
+            if (result.error) throw new Error(result.error);
+            setProvider(result);
+        } catch (err: any) {
+            alert(err.message || "Failed to update availability");
+        } finally {
+            setIsUpdatingAvailability(false);
+        }
+    };
 
     const handleAccept = async (requestId: string) => {
         if (!confirm("Accept this job?")) return;
         setProcessingId(requestId);
         try {
-            // Using a dummy provider ID for now since we don't have separate provider auth yet
-            await api.patch(`/requests/${requestId}/accept`, { providerId: 'provider-dev-1' });
+            await api.patch(`/requests/${requestId}/accept`, { providerId: provider?.id || 'provider-dev-1' });
             // Refresh list
-            fetchRequests();
+            fetchDashboardData();
         } catch (err: any) {
             alert(err.message || "Failed to accept job");
         } finally {
@@ -57,12 +85,29 @@ export default function ProviderDashboardPage() {
                     </Link>
                 </div>
                 <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-sahib-600 rounded-xl flex items-center justify-center font-bold text-xl">
-                        SP
+                    <div className="relative">
+                        <div className="w-14 h-14 bg-sahib-600 rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg shadow-sahib-500/20">
+                            {provider?.category?.slice(0, 2).toUpperCase() || 'SP'}
+                        </div>
+                        <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-4 border-sahib-950 ${provider?.isAvailable ? 'bg-green-500' : 'bg-gray-500'}`} />
                     </div>
-                    <div>
-                        <p className="font-bold text-lg">Dev Provider</p>
-                        <p className="text-sahib-400 text-xs">Rating: 5.0 ★</p>
+                    <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="font-extrabold text-lg leading-tight">{provider?.category || 'Dev Provider'}</p>
+                                <p className="text-sahib-400 text-xs font-bold uppercase tracking-wider">Verified Partner</p>
+                            </div>
+                            <button
+                                onClick={toggleAvailability}
+                                disabled={isUpdatingAvailability}
+                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${provider?.isAvailable
+                                    ? 'bg-green-500/10 text-green-500 border border-green-500/20'
+                                    : 'bg-gray-500/10 text-gray-400 border border-gray-500/20'
+                                    }`}
+                            >
+                                {isUpdatingAvailability ? <Loader2 size={14} className="animate-spin" /> : (provider?.isAvailable ? 'Online' : 'Offline')}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

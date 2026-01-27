@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
+import { SmsService } from '../providers/sms.service';
 
 @Injectable()
 export class AuthService {
@@ -11,6 +12,7 @@ export class AuthService {
     constructor(
         private usersService: UsersService,
         private jwtService: JwtService,
+        private smsService: SmsService,
     ) { }
 
     async generateOtp(phoneNumber: string): Promise<string> {
@@ -18,8 +20,8 @@ export class AuthService {
         const expires = Date.now() + 5 * 60 * 1000; // 5 minutes expiry
         this.otps.set(phoneNumber, { otp, expires });
 
-        // TODO: Integrate with SMS Provider (Termii/Twilio)
-        console.log(`OTP for ${phoneNumber}: ${otp}`);
+        // Send OTP via SMS Service
+        await this.smsService.sendOtp(phoneNumber, otp);
 
         return otp;
     }

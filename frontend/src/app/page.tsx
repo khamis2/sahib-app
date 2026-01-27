@@ -40,23 +40,38 @@ export default function Home() {
         <div className="bg-sahib-50 min-h-screen">
             <main className="max-w-md mx-auto px-6 py-8 md:max-w-2xl lg:max-w-4xl overflow-hidden bg-white min-h-screen shadow-2xl">
                 {/* Header */}
-                <motion.div
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    className="flex justify-between items-center mb-10"
-                >
-                    <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 bg-sahib-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-sahib-500/20">
-                            S
+                <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 max-w-md mx-auto">
+                    <motion.div
+                        initial={{ y: -20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        className="glass rounded-[2rem] px-6 py-3 flex justify-between items-center bg-white/50 backdrop-blur-2xl border border-white/40 shadow-xl shadow-sahib-500/5"
+                    >
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 bg-sahib-600 rounded-lg flex items-center justify-center text-white font-black text-lg">
+                                S
+                            </div>
+                            <h1 className="text-lg font-black tracking-tight text-sahib-950">Sahib</h1>
                         </div>
-                        <h1 className="text-xl font-bold tracking-tight text-sahib-950">Sahib<span className="text-sahib-600">Services</span></h1>
-                    </div>
-                    {isLoggedIn && (
-                        <Link href="/dashboard" className="bg-sahib-50 px-4 py-2 rounded-full text-sahib-600 font-bold text-sm hover:bg-sahib-100 transition-colors">
-                            Dashboard
-                        </Link>
-                    )}
-                </motion.div>
+                        <div className="flex items-center gap-3">
+                            {isLoggedIn ? (
+                                <Link href="/dashboard" className="bg-sahib-600 text-white px-5 py-2 rounded-xl font-bold text-xs hover:bg-sahib-700 transition-colors tap-active">
+                                    Dashboard
+                                </Link>
+                            ) : (
+                                <>
+                                    <Link href="/auth" className="text-sahib-600 font-bold text-xs hover:underline">
+                                        Login
+                                    </Link>
+                                    <Link href="/auth" className="bg-sahib-950 text-white px-5 py-2 rounded-xl font-bold text-xs hover:bg-sahib-800 transition-colors tap-active">
+                                        Join
+                                    </Link>
+                                </>
+                            )}
+                        </div>
+                    </motion.div>
+                </header>
+
+                <div className="pt-24"></div> {/* Spacer for fixed header */}
 
                 {/* Hero Section */}
                 <section className="mb-12">
@@ -132,26 +147,49 @@ export default function Home() {
                     </div>
                 </motion.section>
 
-                {/* Features Bar */}
+                {/* Features Bar (Outstanding Section) */}
                 <motion.div
-                    className="glass p-6 rounded-3xl flex justify-between items-center bg-gradient-to-r from-sahib-50 to-white"
+                    className="p-8 rounded-[2.5rem] bg-sahib-950 text-white relative overflow-hidden mb-12"
                     initial={{ scale: 0.9, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
                 >
-                    <div className="flex items-center gap-4">
-                        <div className="bg-sahib-600 p-3 rounded-2xl text-white shadow-lg shadow-sahib-500/30">
-                            <ShieldCheck size={24} />
+                    <div className="relative z-10 space-y-6">
+                        <div className="flex items-center gap-4">
+                            <div className="bg-sahib-600 p-3 rounded-2xl text-white shadow-lg">
+                                <ShieldCheck size={28} />
+                            </div>
+                            <div>
+                                <h4 className="text-xl font-black">100% Secure Flow</h4>
+                                <p className="text-sahib-400 text-xs font-bold uppercase tracking-widest mt-1">Verified by Sahib Trust</p>
+                            </div>
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-xs text-sahib-400 font-bold uppercase tracking-wider">Verified by</span>
-                            <span className="text-lg font-extrabold text-sahib-950">SafePass+</span>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
+                                <span className="text-sahib-400 text-[10px] font-black uppercase block mb-1">Success Rate</span>
+                                <span className="text-2xl font-black">99.9%</span>
+                            </div>
+                            <div className="bg-white/10 p-4 rounded-2xl border border-white/10">
+                                <span className="text-sahib-400 text-[10px] font-black uppercase block mb-1">Active SPs</span>
+                                <span className="text-2xl font-black">2.5k+</span>
+                            </div>
+                        </div>
+
+                        <div className="flex -space-x-3 items-center pt-2">
+                            {[1, 2, 3, 4, 5].map((i) => (
+                                <img
+                                    key={i}
+                                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=provider${i}`}
+                                    className="w-10 h-10 rounded-full border-4 border-sahib-950 bg-sahib-800"
+                                    alt="Provider"
+                                />
+                            ))}
+                            <div className="px-4 text-xs font-bold text-sahib-400">Join our verified elite</div>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 text-sahib-600 bg-white px-4 py-2 rounded-full shadow-sm border border-sahib-100">
-                        <TrendingUp size={18} />
-                        <span className="text-sm font-bold">99% Success</span>
-                    </div>
+
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-sahib-600/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
                 </motion.div>
 
                 {/* Footer Area Placeholder */}

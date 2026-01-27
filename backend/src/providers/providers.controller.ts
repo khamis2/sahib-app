@@ -24,6 +24,19 @@ export class ProvidersController {
         return this.providersService.findAllActive();
     }
 
+    @Get('user/:userId')
+    async getByUser(@Param('userId') userId: string) {
+        return this.providersService.findByUserId(userId);
+    }
+
+    @Patch(':id/availability')
+    async updateAvailability(
+        @Param('id') id: string,
+        @Body() body: { isAvailable: boolean },
+    ) {
+        return this.providersService.updateAvailability(id, body.isAvailable);
+    }
+
     @Get(':id')
     async getOne(@Param('id') id: string) {
         return this.providersService.findOne(id);

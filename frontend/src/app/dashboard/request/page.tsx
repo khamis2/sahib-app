@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Send, MapPin, DollarSign, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const CATEGORIES = [
     { id: 'repairs', label: 'Repairs', icon: '🔧' },
 ];
 
-export default function RequestServicePage() {
+function RequestServiceContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const typeParam = searchParams.get('type');
@@ -236,5 +236,17 @@ export default function RequestServicePage() {
                 </form>
             </main>
         </div>
+    );
+}
+
+export default function RequestServicePage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-sahib-50">
+                <Loader2 className="animate-spin text-sahib-600" size={48} />
+            </div>
+        }>
+            <RequestServiceContent />
+        </Suspense>
     );
 }

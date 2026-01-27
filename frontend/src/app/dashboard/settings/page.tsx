@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, User, Mail, Phone, Camera, Loader2, CheckCircle2, Save } from "lucide-react";
+import { ArrowLeft, User, Mail, Phone, Camera, Loader2, CheckCircle2, Save, Briefcase, LogOut } from "lucide-react";
 import Link from "next/link";
 import { api } from "@/lib/api";
 
@@ -157,7 +157,31 @@ export default function SettingsPage() {
                             </>
                         )}
                     </button>
+
+                    {user.role === 'USER' && (
+                        <Link
+                            href="/provider/onboarding"
+                            className="w-full py-4 border-2 border-sahib-100 text-sahib-600 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-sahib-50 transition-all text-sm"
+                        >
+                            <Briefcase size={18} />
+                            Become a Service Provider
+                        </Link>
+                    )}
                 </form>
+
+                <div className="pt-8 border-t border-sahib-50">
+                    <button
+                        onClick={() => {
+                            localStorage.removeItem('user');
+                            localStorage.removeItem('accessToken');
+                            window.location.href = '/';
+                        }}
+                        className="w-full py-4 text-red-600 font-bold flex items-center justify-center gap-2 hover:bg-red-50 rounded-2xl transition-all text-sm"
+                    >
+                        <LogOut size={18} />
+                        Logout from Sahib
+                    </button>
+                </div>
             </main>
         </div>
     );

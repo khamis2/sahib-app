@@ -8,14 +8,14 @@
     "theme_color": "#0284c7",
     "icons": [
         {
-            "src": "https://api.dicebear.com/7.x/shapes/svg?seed=Sahib&backgroundColor=0284c7&shape1Color=ffffff",
+            "src": "/icon.png",
             "sizes": "192x192",
-            "type": "image/svg+xml"
+            "type": "image/png"
         },
         {
-            "src": "https://api.dicebear.com/7.x/shapes/svg?seed=Sahib&backgroundColor=0284c7&shape1Color=ffffff",
+            "src": "/icon.png",
             "sizes": "512x512",
-            "type": "image/svg+xml"
+            "type": "image/png"
         }
     ]
 }

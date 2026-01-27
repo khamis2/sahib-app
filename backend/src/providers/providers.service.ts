@@ -30,12 +30,17 @@ export class ProvidersService {
         return this.db.saveOne(provider);
     }
 
+    async findByUserId(userId: string): Promise<ServiceProvider | null> {
+        return (await this.db.findOne({ userId })) || null;
+    }
+
     async verifyProvider(providerId: string, status: VerificationStatus, ninBvnHash?: string): Promise<ServiceProvider> {
         const provider = await this.db.findOne({ id: providerId });
         if (!provider) throw new NotFoundException('Provider not found');
 
         provider.verificationStatus = status;
         if (ninBvnHash) provider.ninBvnHash = ninBvnHash;
+        provider.updatedAt = new Date();
 
         if (status === VerificationStatus.VERIFIED) {
             const user = await this.usersService.findOne(provider.userId);
@@ -45,6 +50,15 @@ export class ProvidersService {
             }
         }
 
+        return this.db.saveOne(provider);
+    }
+
+    async updateAvailability(providerId: string, isAvailable: boolean): Promise<ServiceProvider> {
+        const provider = await this.db.findOne({ id: providerId });
+        if (!provider) throw new NotFoundException('Provider not found');
+
+        provider.isAvailable = isAvailable;
+        provider.updatedAt = new Date();
         return this.db.saveOne(provider);
     }
 

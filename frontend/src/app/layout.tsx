@@ -5,6 +5,9 @@ export const metadata: Metadata = {
     title: "Sahib Services | Trusted Help, Instantly",
     description: "Connect with trusted service providers for urgent daily needs in Nigeria. Fully halal, fully trusted.",
     manifest: "/manifest.json",
+    icons: {
+        apple: "/icon.png",
+    },
 };
 
 export const viewport: Viewport = {

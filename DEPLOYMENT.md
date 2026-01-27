@@ -39,5 +39,10 @@ Run the deployment script to push your latest code to GitHub.
 4.  Launch the app from your home screen!
 
 ## Troubleshooting
+-   **404: NOT_FOUND (Automatic Fix)**:
+    1.  I have created a special `vercel.json` at the root of your project to fix this automatically.
+    2.  Double-click `deployment_script.bat` to push this new file to GitHub.
+    3.  Go to Vercel -> **Deployments** tab -> click `...` -> **Redeploy**.
+    4.  Vercel will now automatically find the `frontend` folder using the new settings.
 -   **"Network Error"**: Make sure your `NEXT_PUBLIC_API_URL` in Vercel is correct and starts with `https://`.
 -   **Data Disappeared**: As mentioned, the free hosting resets the "file-based database". This is expected for now.

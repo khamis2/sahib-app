@@ -50,9 +50,9 @@ export default function DashboardPage() {
     return (
         <div className="bg-sahib-50 min-h-screen pb-24 max-w-md mx-auto bg-white shadow-2xl relative">
             {/* Top Bar */}
-            <div className="p-6 flex justify-between items-center bg-white sticky top-0 z-20 border-b border-sahib-50">
+            <div className="px-6 py-4 flex justify-between items-center bg-white/80 backdrop-blur-xl sticky top-0 z-20 border-b border-sahib-50">
                 <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-sahib-600 rounded-2xl flex items-center justify-center text-white p-0.5 overflow-hidden shadow-lg shadow-sahib-500/20">
+                    <div className="w-10 h-10 bg-sahib-600 rounded-2xl flex items-center justify-center text-white p-0.5 overflow-hidden shadow-lg shadow-sahib-500/20 tap-active">
                         <img
                             src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.phoneNumber || 'Sahib'}`}
                             alt="Profile"
@@ -60,24 +60,20 @@ export default function DashboardPage() {
                         />
                     </div>
                     <div>
-                        <h2 className="text-xs text-gray-500 font-bold uppercase tracking-widest">Sahib</h2>
-                        <p className="font-extrabold text-sahib-950">{user?.phoneNumber || 'Guest User'}</p>
+                        <h2 className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] leading-none mb-1">Welcome</h2>
+                        <p className="font-extrabold text-sahib-950 text-sm">{user?.fullName?.split(' ')[0] || user?.phoneNumber || 'Sahib User'}</p>
                     </div>
                 </div>
-                <Link href="/dashboard/request" className="flex flex-col items-center gap-2 group">
-                    <div className="w-14 h-14 bg-sahib-50 rounded-2xl flex items-center justify-center text-sahib-600 group-hover:bg-sahib-600 group-hover:text-white transition-all shadow-sm">
-                        <Plus size={28} />
-                    </div>
-                    <span className="text-xs font-bold text-sahib-950">Request Service</span>
-                </Link>
-                <div className="flex gap-2">
-                    <Link href="/provider/dashboard" className="p-2.5 bg-sahib-50 rounded-xl text-sahib-600 hover:bg-sahib-100 transition-colors font-bold text-xs flex items-center">
+
+                <div className="flex items-center gap-1">
+                    <Link href="/provider/dashboard" className="px-3 py-1.5 bg-sahib-50 rounded-full text-sahib-600 hover:bg-sahib-600 hover:text-white transition-all font-bold text-[10px] uppercase tracking-wider">
                         SP Mode
                     </Link>
-                    <Link href="/dashboard/notifications" className="p-2.5 bg-sahib-50 rounded-xl text-sahib-600 hover:bg-sahib-100 transition-colors">
+                    <Link href="/dashboard/notifications" className="p-2 text-sahib-400 hover:text-sahib-600 tap-active relative">
                         <Bell size={20} />
+                        <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                     </Link>
-                    <Link href="/dashboard/settings" className="p-2.5 bg-sahib-50 rounded-xl text-sahib-600 hover:bg-sahib-100 transition-colors">
+                    <Link href="/dashboard/settings" className="p-2 text-sahib-400 hover:text-sahib-600 tap-active">
                         <SettingsIcon size={20} />
                     </Link>
                 </div>
@@ -149,7 +145,7 @@ export default function DashboardPage() {
                                         initial={{ x: -20, opacity: 0 }}
                                         animate={{ x: 0, opacity: 1 }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="card bg-gradient-to-br from-sahib-600 to-sahib-800 border-none text-white p-6 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform"
+                                        className="card bg-gradient-to-br from-sahib-600 to-sahib-800 border-none text-white p-6 relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform hover-glow"
                                     >
                                         <div className="relative z-10 flex justify-between items-start mb-6">
                                             <div className="flex items-center gap-4">
@@ -201,38 +197,83 @@ export default function DashboardPage() {
 
                 {/* Service Categories Section */}
                 <section>
-                    <h3 className="text-xl font-extrabold text-sahib-950 mb-5">Quick Help</h3>
-                    <div className="grid grid-cols-4 gap-4 text-center">
+                    <div className="flex justify-between items-center mb-5">
+                        <h3 className="text-xl font-extrabold text-sahib-950 px-1">How can we help?</h3>
+                        <span className="text-[10px] font-black text-sahib-500 uppercase tracking-widest bg-sahib-50 px-2 py-1 rounded-md">24/7 Available</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 staggered-list">
                         {[
-                            { icon: Package, label: "Send", color: "bg-blue-50 text-blue-600", link: "/dashboard/request?type=delivery" },
-                            { icon: Wrench, label: "Fix", color: "bg-orange-50 text-orange-600", link: "/dashboard/request?type=repair" },
-                            { icon: StarIcon, label: "Top", color: "bg-yellow-50 text-yellow-600", link: "/dashboard/favorites" },
-                            { icon: MoreVertical, label: "More", color: "bg-gray-100 text-gray-500", link: "/dashboard/request" }
+                            { icon: Package, label: "Delivery", color: "from-blue-500/10 to-blue-600/5 text-blue-600", desc: "Send anything", link: "/dashboard/request?type=delivery" },
+                            { icon: Wrench, label: "Repairs", color: "from-orange-500/10 to-orange-600/5 text-orange-600", desc: "Fix anything", link: "/dashboard/request?type=repair" },
+                            { icon: ShoppingBag, label: "Groceries", color: "from-green-500/10 to-green-600/5 text-green-600", desc: "Daily needs", link: "/dashboard/request?type=groceries" },
+                            { icon: StarIcon, label: "Favorites", color: "from-yellow-500/10 to-yellow-600/5 text-yellow-600", desc: "Quick access", link: "/dashboard/favorites" }
                         ].map((cat, i) => (
-                            <Link href={cat.link} key={i} className="space-y-2 group cursor-pointer block">
-                                <div className={`${cat.color} aspect-square rounded-[1.5rem] flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm`}>
-                                    <cat.icon size={24} />
+                            <Link href={cat.link} key={i} className="group tap-active block">
+                                <div className={`bg-gradient-to-br ${cat.color} p-6 rounded-[2.5rem] border border-white relative overflow-hidden h-full`}>
+                                    <div className="relative z-10 space-y-3">
+                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform">
+                                            <cat.icon size={24} />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-black text-sahib-950 text-sm">{cat.label}</h4>
+                                            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{cat.desc}</p>
+                                        </div>
+                                    </div>
+                                    <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-white/20 rounded-full blur-2xl group-hover:bg-white/40 transition-colors"></div>
                                 </div>
-                                <span className="text-[10px] font-extrabold uppercase tracking-widest text-gray-400">{cat.label}</span>
                             </Link>
                         ))}
                     </div>
                 </section>
+
+                {/* Professional Promotion (Outstanding Feature) */}
+                <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="bg-sahib-600 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl shadow-sahib-500/20"
+                >
+                    <div className="relative z-10 flex flex-col gap-4">
+                        <div className="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full w-fit">
+                            <StarIcon size={14} className="fill-white" />
+                            <span className="text-[10px] font-black uppercase tracking-widest">Sahib Pro</span>
+                        </div>
+                        <div>
+                            <h3 className="text-2xl font-black leading-tight">Zero-Stress<br />Subscription</h3>
+                            <p className="text-sahib-100 text-sm font-medium mt-2">Get 50% discount on all service delivery fees with Sahib Pro.</p>
+                        </div>
+                        <button className="bg-white text-sahib-600 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform w-fit">
+                            Join Now
+                        </button>
+                    </div>
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 -translate-y-1/2 translate-x-1/2 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-sahib-400/20 -translate-x-1/2 translate-y-1/2 rounded-full blur-2xl"></div>
+                </motion.div>
             </div>
 
+            {/* Floating Action Button */}
+            <Link href="/dashboard/request" className="fixed bottom-28 right-6 z-30">
+                <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-16 h-16 bg-sahib-600 text-white rounded-3xl shadow-2xl shadow-sahib-600/40 flex items-center justify-center"
+                >
+                    <Plus size={32} />
+                </motion.button>
+            </Link>
+
             {/* Navigation Bar */}
-            <div className="fixed bottom-6 left-6 right-6 flex justify-between items-center bg-sahib-950/90 backdrop-blur-xl p-4 rounded-[2rem] shadow-2xl border border-white/10 max-w-[calc(448px-3rem)] mx-auto">
-                <Link href="/dashboard" className="text-white bg-sahib-600 p-3 rounded-2xl shadow-lg shadow-sahib-600/30 transition-transform active:scale-90">
+            <div className="fixed bottom-6 left-6 right-6 flex justify-between items-center bg-sahib-950/90 backdrop-blur-xl p-4 rounded-[2rem] shadow-2xl border border-white/10 max-w-[calc(448px-3rem)] mx-auto z-50">
+                <Link href="/dashboard" className="text-white bg-sahib-600 p-3 rounded-2xl shadow-lg shadow-sahib-600/30 tap-active">
                     <NavigationIcon size={24} />
                 </Link>
-                <Link href="/dashboard/history" className="text-sahib-400 p-3 hover:text-white transition-colors">
+                <Link href="/dashboard/history" className="text-sahib-400 p-3 hover:text-white transition-colors tap-active">
                     <HistoryIcon size={24} />
                 </Link>
                 <div className="w-px h-6 bg-white/10 mx-2"></div>
-                <Link href="/dashboard/fund" className="text-sahib-400 p-3 hover:text-white transition-colors">
+                <Link href="/dashboard/fund" className="text-sahib-400 p-3 hover:text-white transition-colors tap-active">
                     <Wallet size={24} />
                 </Link>
-                <Link href="/dashboard/favorites" className="text-sahib-400 p-3 hover:text-white transition-colors">
+                <Link href="/dashboard/favorites" className="text-sahib-400 p-3 hover:text-white transition-colors tap-active">
                     <StarIcon size={24} />
                 </Link>
             </div>
