@@ -22,6 +22,9 @@ export class User {
   @Column()
   fullName: string;
 
+  @Column({ nullable: true })
+  avatarUrl: string;
+
   @Column({
     type: 'varchar',
     default: Role.USER,

@@ -54,7 +54,7 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-sahib-600 rounded-2xl flex items-center justify-center text-white p-0.5 overflow-hidden shadow-lg shadow-sahib-500/20 tap-active">
                         <img
-                            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.phoneNumber || 'Sahib'}`}
+                            src={user?.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.phoneNumber || 'Sahib'}`}
                             alt="Profile"
                             className="w-full h-full object-cover rounded-xl"
                         />

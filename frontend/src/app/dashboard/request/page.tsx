@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Send, MapPin, DollarSign, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowLeft, Send, MapPin, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { api } from "@/lib/api";
@@ -182,7 +182,7 @@ function RequestServiceContent() {
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-sahib-950 uppercase tracking-wider ml-1">Price (₦)</label>
                                 <div className="relative">
-                                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-sahib-400" size={20} />
+                                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sahib-400 font-bold text-lg">₦</span>
                                     <input
                                         required
                                         type="number"

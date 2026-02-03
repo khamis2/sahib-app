@@ -1,5 +1,35 @@
 [
   {
+    "id": "5b9a6233-0d49-4e22-8ff8-d6d8e66bcc71",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "price": 1000,
+    "priority": "NORMAL",
+    "location": {
+      "lat": 0,
+      "lng": 0,
+      "address": "yuio"
+    },
+    "status": "ACCEPTED",
+    "createdAt": "2026-02-03T10:12:16.240Z",
+    "updatedAt": "2026-02-03T10:12:16.240Z",
+    "providerId": "simulated-provider-123"
+  },
+  {
+    "id": "01751cc6-78f0-468a-9f9c-7b56f4b18e72",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "price": 22,
+    "priority": "NORMAL",
+    "location": {
+      "lat": 0,
+      "lng": 0,
+      "address": "Kantin tata street ungogo LGA"
+    },
+    "status": "ACCEPTED",
+    "createdAt": "2026-02-03T10:02:41.889Z",
+    "updatedAt": "2026-02-03T10:02:41.889Z",
+    "providerId": "simulated-provider-123"
+  },
+  {
     "id": "2a59c288-49de-41a3-9d1c-b66958f45ec8",
     "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
     "price": 45249,
@@ -9,9 +39,10 @@
       "lng": 0,
       "address": "Kano"
     },
-    "status": "PENDING",
+    "status": "ACCEPTED",
     "createdAt": "2026-01-19T12:44:04.892Z",
-    "updatedAt": "2026-01-19T12:44:04.892Z"
+    "updatedAt": "2026-01-19T12:44:04.892Z",
+    "providerId": "a088f328-6571-47da-9f85-a855e45548e0"
   },
   {
     "id": "7df96962-64a7-4d0e-9f86-b89e7de23a3d",
@@ -23,9 +54,10 @@
       "lng": 0,
       "address": "Mariri"
     },
-    "status": "PENDING",
+    "status": "ACCEPTED",
     "createdAt": "2026-01-19T12:37:06.157Z",
-    "updatedAt": "2026-01-19T12:37:06.157Z"
+    "updatedAt": "2026-01-19T12:37:06.157Z",
+    "providerId": "a088f328-6571-47da-9f85-a855e45548e0"
   },
   {
     "id": "9cf1bf35-5171-4859-a25d-59d5a730958a",
@@ -51,9 +83,10 @@
       "lng": 0,
       "address": "R/zaki"
     },
-    "status": "PENDING",
+    "status": "ACCEPTED",
     "createdAt": "2026-01-19T10:56:19.754Z",
-    "updatedAt": "2026-01-19T10:56:19.754Z"
+    "updatedAt": "2026-01-19T10:56:19.754Z",
+    "providerId": "a088f328-6571-47da-9f85-a855e45548e0"
   },
   {
     "id": "7aac83ce-af7a-4e48-8e4d-caa6b05f498b",
@@ -65,8 +98,9 @@
       "lng": 0,
       "address": "danladi nasidi"
     },
-    "status": "PENDING",
+    "status": "ACCEPTED",
     "createdAt": "2026-01-19T10:44:03.157Z",
-    "updatedAt": "2026-01-19T10:44:03.157Z"
+    "updatedAt": "2026-01-19T10:44:03.157Z",
+    "providerId": "a088f328-6571-47da-9f85-a855e45548e0"
   }
 ]

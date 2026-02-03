@@ -16,7 +16,6 @@ export default function FundWalletPage() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
-    const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
     const [customAmount, setCustomAmount] = useState("");
 
     useEffect(() => {
@@ -29,7 +28,7 @@ export default function FundWalletPage() {
     }, [router]);
 
     const handleFund = async () => {
-        const amount = selectedAmount || parseInt(customAmount);
+        const amount = parseInt(customAmount);
         if (!amount || amount < 100) {
             setError("Minimum amount is ₦100");
             return;
@@ -115,7 +114,7 @@ export default function FundWalletPage() {
                                 <CheckCircle2 size={48} />
                             </div>
                             <h2 className="text-2xl font-bold text-sahib-950 mb-2">Wallet Funded!</h2>
-                            <p className="text-gray-500 font-medium">₦{(selectedAmount || parseInt(customAmount)).toLocaleString()} added to your wallet</p>
+                            <p className="text-gray-500 font-medium">₦{parseInt(customAmount).toLocaleString()} added to your wallet</p>
                         </div>
                     </motion.div>
                 )}
@@ -127,11 +126,8 @@ export default function FundWalletPage() {
                         {AMOUNTS.map((amount) => (
                             <button
                                 key={amount}
-                                onClick={() => {
-                                    setSelectedAmount(amount);
-                                    setCustomAmount("");
-                                }}
-                                className={`p-4 rounded-2xl border-2 font-bold transition-all ${selectedAmount === amount
+                                onClick={() => setCustomAmount(amount.toString())}
+                                className={`p-4 rounded-2xl border-2 font-bold transition-all ${parseInt(customAmount) === amount
                                     ? 'border-sahib-600 bg-sahib-50 text-sahib-600'
                                     : 'border-sahib-100 bg-white text-sahib-950 hover:border-sahib-200'
                                     }`}
@@ -154,7 +150,6 @@ export default function FundWalletPage() {
                             value={customAmount}
                             onChange={(e) => {
                                 setCustomAmount(e.target.value);
-                                setSelectedAmount(null);
                             }}
                         />
                     </div>
@@ -190,7 +185,7 @@ export default function FundWalletPage() {
 
                 {/* Fund Button */}
                 <button
-                    disabled={loading || (!selectedAmount && !customAmount)}
+                    disabled={loading || !customAmount}
                     onClick={handleFund}
                     className="btn-primary w-full py-4 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -199,7 +194,7 @@ export default function FundWalletPage() {
                     ) : (
                         <>
                             <Plus size={20} />
-                            <span>Fund ₦{(selectedAmount || parseInt(customAmount) || 0).toLocaleString()}</span>
+                            <span>Fund ₦{(parseInt(customAmount) || 0).toLocaleString()}</span>
                         </>
                     )}
                 </button>

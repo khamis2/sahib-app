@@ -1,0 +1,12 @@
+[
+  {
+    "id": "a088f328-6571-47da-9f85-a855e45548e0",
+    "userId": "ff453a87-fb1b-4281-9cfe-0a78454d5594",
+    "category": "delivery",
+    "verificationStatus": "VERIFIED",
+    "isAvailable": true,
+    "createdAt": "2026-02-03T09:00:13.390Z",
+    "updatedAt": "2026-02-03T09:01:00.317Z",
+    "ninBvnHash": "98490892941"
+  }
+]

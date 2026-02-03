@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, User, Mail, Phone, Camera, Loader2, CheckCircle2, Save, Briefcase, LogOut } from "lucide-react";
 import Link from "next/link";
@@ -16,6 +16,8 @@ export default function SettingsPage() {
         fullName: "",
         email: "",
     });
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const userData = localStorage.getItem('user');
@@ -54,6 +56,29 @@ export default function SettingsPage() {
         }
     };
 
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setLoading(true);
+        setError("");
+
+        try {
+            const result = await api.upload(`/users/${user.id}/avatar`, file);
+
+            // Update user state with new avatarUrl
+            const updatedUser = { ...user, avatarUrl: result.avatarUrl }; // Assuming backend returns updated user
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            setUser(updatedUser);
+            setSuccess(true);
+            setTimeout(() => setSuccess(false), 3000);
+        } catch (err: any) {
+            setError(err.message || "Failed to upload image");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     if (!user) return null;
 
     return (
@@ -72,14 +97,24 @@ export default function SettingsPage() {
                     <div className="relative">
                         <div className="w-24 h-24 bg-sahib-100 rounded-full overflow-hidden border-4 border-white shadow-lg">
                             <img
-                                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.phoneNumber}`}
+                                src={user.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.phoneNumber}`}
                                 alt="Profile"
                                 className="w-full h-full object-cover"
                             />
                         </div>
-                        <button className="absolute bottom-0 right-0 p-2 bg-sahib-600 text-white rounded-full hover:bg-sahib-700 transition-colors shadow-md">
+                        <button
+                            onClick={() => fileInputRef.current?.click()}
+                            className="absolute bottom-0 right-0 p-2 bg-sahib-600 text-white rounded-full hover:bg-sahib-700 transition-colors shadow-md"
+                        >
                             <Camera size={16} />
                         </button>
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            className="hidden"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                        />
                     </div>
                     <p className="text-sm text-gray-500 font-medium">Tap to change photo</p>
                 </div>

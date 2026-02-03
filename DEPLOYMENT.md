@@ -6,7 +6,7 @@ To use the app on your iPhone, we need to deploy it to the internet. Since this 
 2.  **Frontend** (UI) -> **Vercel** (Best for Next.js)
 
 > [!WARNING]
-> **Data Reset Warning**: The current backend uses a local file system ("SimpleJsonDb") to store data. On hosting services like Render (Free Tier) or Vercel, the file system is ephemeral. **Code updates or server restarts will likely wipe your data (users, requests).** For a real production app, we should switch to a database like Supabase later.
+> **Data Reset Warning**: The current backend uses a local file system ("SimpleJsonDb" & local uploads) to store data. On hosting services like Render (Free Tier) or Vercel, the file system is ephemeral. **Code updates or server restarts will likely wipe your data (users, requests, PROFILE IMAGES).** For a real production app, we should switch to a database like Supabase and Cloudinary later.
 
 ## Step 1: Push Code to GitHub
 Run the deployment script to push your latest code to GitHub.

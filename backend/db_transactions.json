@@ -38,5 +38,21 @@
     "status": "HELD_IN_ESCROW",
     "createdAt": "2026-01-19T12:44:04.893Z",
     "updatedAt": "2026-01-19T12:44:04.893Z"
+  },
+  {
+    "id": "4229bdee-0270-49eb-8646-69569c6ce600",
+    "requestId": "01751cc6-78f0-468a-9f9c-7b56f4b18e72",
+    "amount": 22,
+    "status": "HELD_IN_ESCROW",
+    "createdAt": "2026-02-03T10:02:41.895Z",
+    "updatedAt": "2026-02-03T10:02:41.895Z"
+  },
+  {
+    "id": "2fc81928-4c9a-475a-a482-e5d415a62bcb",
+    "requestId": "5b9a6233-0d49-4e22-8ff8-d6d8e66bcc71",
+    "amount": 1000,
+    "status": "HELD_IN_ESCROW",
+    "createdAt": "2026-02-03T10:12:16.242Z",
+    "updatedAt": "2026-02-03T10:12:16.242Z"
   }
 ]
