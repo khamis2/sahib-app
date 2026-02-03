@@ -132,7 +132,12 @@ export default function LoginPage() {
                             disabled={loading}
                             className="btn-primary w-full py-4 text-lg shadow-xl disabled:opacity-70 flex items-center justify-center gap-3"
                         >
-                            {loading ? <Loader2 className="animate-spin" size={24} /> : "Get OTP"}
+                            {loading ? (
+                                <>
+                                    <Loader2 className="animate-spin" size={24} />
+                                    <span>Connecting...</span>
+                                </>
+                            ) : "Get OTP"}
                         </button>
                     </motion.div>
                 ) : (
