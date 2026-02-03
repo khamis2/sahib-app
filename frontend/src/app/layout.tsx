@@ -6,7 +6,17 @@ export const metadata: Metadata = {
     description: "Connect with trusted service providers for urgent daily needs in Nigeria. Fully halal, fully trusted.",
     manifest: "/manifest.json",
     icons: {
-        apple: "/icon.png",
+        icon: "/icon.png",
+        apple: [
+            { url: "/icon.png", sizes: "180x180", type: "image/png" },
+            { url: "/icon.png", sizes: "152x152", type: "image/png" },
+            { url: "/icon.png", sizes: "120x120", type: "image/png" },
+        ],
+    },
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: "default",
+        title: "Sahib Services",
     },
 };
 
