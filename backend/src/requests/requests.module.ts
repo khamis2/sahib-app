@@ -9,7 +9,11 @@ import { Transaction } from '../entities/Transaction.entity';
 import { User } from '../entities/User.entity';
 
 @Module({
-    imports: [UsersModule, ProvidersModule],
+    imports: [
+        TypeOrmModule.forFeature([ServiceRequest, Transaction]),
+        UsersModule,
+        ProvidersModule,
+    ],
     providers: [RequestsService],
     controllers: [RequestsController],
     exports: [RequestsService],

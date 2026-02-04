@@ -1,15 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { ServiceProvider, VerificationStatus } from '../entities/ServiceProvider.entity';
 import { Role } from '../entities/User.entity';
-import { SimpleJsonDb } from '../lib/mock-db';
 import { UsersService } from '../users/users.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ProvidersService {
-    private db = new SimpleJsonDb<ServiceProvider>('providers');
-
     constructor(
+        @InjectRepository(ServiceProvider)
+        private providerRepository: Repository<ServiceProvider>,
         private usersService: UsersService,
     ) { }
 
@@ -17,7 +18,7 @@ export class ProvidersService {
         const user = await this.usersService.findOne(userId);
         if (!user) throw new NotFoundException('User not found');
 
-        const provider = {
+        const provider = this.providerRepository.create({
             id: uuidv4(),
             userId,
             category,
@@ -25,17 +26,17 @@ export class ProvidersService {
             isAvailable: true,
             createdAt: new Date(),
             updatedAt: new Date(),
-        } as ServiceProvider;
+        });
 
-        return this.db.saveOne(provider);
+        return await this.providerRepository.save(provider);
     }
 
     async findByUserId(userId: string): Promise<ServiceProvider | null> {
-        return (await this.db.findOne({ userId })) || null;
+        return await this.providerRepository.findOne({ where: { userId } });
     }
 
     async verifyProvider(providerId: string, status: VerificationStatus, ninBvnHash?: string): Promise<ServiceProvider> {
-        const provider = await this.db.findOne({ id: providerId });
+        const provider = await this.providerRepository.findOne({ where: { id: providerId } });
         if (!provider) throw new NotFoundException('Provider not found');
 
         provider.verificationStatus = status;
@@ -50,24 +51,28 @@ export class ProvidersService {
             }
         }
 
-        return this.db.saveOne(provider);
+        return await this.providerRepository.save(provider);
     }
 
     async updateAvailability(providerId: string, isAvailable: boolean): Promise<ServiceProvider> {
-        const provider = await this.db.findOne({ id: providerId });
+        const provider = await this.providerRepository.findOne({ where: { id: providerId } });
         if (!provider) throw new NotFoundException('Provider not found');
 
         provider.isAvailable = isAvailable;
         provider.updatedAt = new Date();
-        return this.db.saveOne(provider);
+        return await this.providerRepository.save(provider);
     }
 
     async findAllActive(): Promise<ServiceProvider[]> {
-        const all = await this.db.find();
-        return all.filter(p => p.isAvailable && p.verificationStatus === VerificationStatus.VERIFIED);
+        return await this.providerRepository.find({
+            where: {
+                isAvailable: true,
+                verificationStatus: VerificationStatus.VERIFIED,
+            },
+        });
     }
 
     async findOne(id: string): Promise<ServiceProvider | null> {
-        return (await this.db.findOne({ id })) || null;
+        return await this.providerRepository.findOne({ where: { id } });
     }
 }
