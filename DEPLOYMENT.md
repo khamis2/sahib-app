@@ -39,10 +39,10 @@ Run the deployment script to push your latest code to GitHub.
 4.  Launch the app from your home screen!
 
 ## Troubleshooting
--   **404: NOT_FOUND (Automatic Fix)**:
-    1.  I have created a special `vercel.json` at the root of your project to fix this automatically.
-    2.  Double-click `deployment_script.bat` to push this new file to GitHub.
-    3.  Go to Vercel -> **Deployments** tab -> click `...` -> **Redeploy**.
-    4.  Vercel will now automatically find the `frontend` folder using the new settings.
+-   **404: NOT_FOUND / DEPLOYMENT_NOT_FOUND**:
+    1.  **Check the URL**: Ensure the URL in your browser matches the **Production Domain** shown in your Vercel Dashboard. The name `sahib-app` might have been taken, so Vercel may have assigned a name like `sahib-app-three.vercel.app`.
+    2.  **Verify Root Directory**: In Vercel -> Settings -> General, ensure **Root Directory** is set to `frontend`.
+    3.  **Check Build Logs**: Go to the "Deployments" tab in Vercel. If the status is "Error", click on it to see why the build failed.
+    4.  **Redeploy**: If you've just pushed code, go to Vercel -> Deployments -> click the three dots `...` on the latest entry -> **Redeploy**.
 -   **"Network Error"**: Make sure your `NEXT_PUBLIC_API_URL` in Vercel is correct and starts with `https://`.
 -   **Data Disappeared**: As mentioned, the free hosting resets the "file-based database". This is expected for now.
